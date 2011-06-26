@@ -1,0 +1,6 @@
+%h1=t :new_competitor
+= render "shared/error_messages", :target => @competitor
+
+- form_for(:competitor, :url => collection_url, :html => { :multipart => true }) do |f|
+  = render :partial => "form", :locals => { :f => f }
+  = render :partial => "admin/shared/new_resource_links"

@@ -1,0 +1,24 @@
+.toolbar
+  %ul.actions
+    %li= button_link_to t(:new_competitor), new_admin_competitor_path, :icon => 'add'
+  %br.clear
+%h1=t(:competitors)
+
+%table.index
+  %thead
+    %tr
+      %th=t(:competitor_name)
+      %th=t(:search_page)
+      %th=t(:search_link_selector)
+      %th=t(:search_price_selector)
+      %th{:width => 150}= t("action")
+  %tbody
+    - for competitor in @competitors
+      %tr{:id => dom_id(competitor)}
+        %td= competitor.name
+        %td= competitor.search_page
+        %td= competitor.search_link_selector
+        %td= competitor.search_price_selector
+        %td
+          = link_to_edit competitor
+          = link_to_delete competitor

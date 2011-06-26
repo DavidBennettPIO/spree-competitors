@@ -1,0 +1,16 @@
+%h1=t(:competitor_prices)
+
+%table.index
+  %thead
+    %tr
+      %th=t(:varent_name)
+      %th=t(:our_price)
+      - for competitor in @competitors
+        %th=competitor
+  %tbody
+    - @results.each_with_index do |result, i|
+      %tr{:id => 'variant_' + i.to_s}
+        %td= @variants[i].name
+        %td= @variants[i].price
+        - for price in result
+          %td=price

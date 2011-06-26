@@ -1,0 +1,5 @@
+%h1=t :editing_competitor
+
+= form_for(@competitor, :url => object_url, :html => { :method => :put }) do |f|
+  = render :partial => "form", :locals => { :f => f }
+  = render "admin/shared/edit_resource_links"
