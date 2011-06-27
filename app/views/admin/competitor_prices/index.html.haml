@@ -10,7 +10,7 @@
   %tbody
     - @results.each_with_index do |result, i|
       %tr{:id => 'variant_' + i.to_s}
-        %td= @variants[i].name
-        %td= @variants[i].price
-        - for price in result
-          %td=price
+        %td= display_variant_name @variants[i]
+        %td= product_price(@variants[i])
+        - for competitor_price in result
+          %td=display_competitor_price add_gst(@variants[i].price), competitor_price

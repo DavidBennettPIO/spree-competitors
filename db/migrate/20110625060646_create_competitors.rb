@@ -6,7 +6,9 @@ class CreateCompetitors < ActiveRecord::Migration
       
       t.string :search_page
       t.string :search_link_selector
+      t.string :search_name_selector
       t.string :search_price_selector
+      t.string :search_special_price_selector
 
       t.timestamps
     end

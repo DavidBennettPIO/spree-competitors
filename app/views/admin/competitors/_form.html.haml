@@ -12,14 +12,24 @@
     = f.label :search_page
     <br />
     = f.text_field :search_page, :style => "width:410px"
-    NOTE: Can use things like \#{varent.name} or \#{varent.product.product_properties.where(:property_name => 'some_name')}
+    NOTE: Can use things like \#{URI.escape(variant.name)} or \#{variant.product.product_properties.where(:property_name => 'some_name')}
   = f.field_container :search_link_selector do
     = f.label :search_link_selector
     <br />
     = f.text_field :search_link_selector, :style => "width:410px"
     Example: div#search_results .search_result:first a
+  = f.field_container :search_name_selector do
+    = f.label :search_name_selector
+    <br />
+    = f.text_field :search_name_selector, :style => "width:410px"
+    Example: div#search_results .search_result .item-name a
   = f.field_container :search_price_selector do
     = f.label :search_price_selector
     <br />
     = f.text_field :search_price_selector, :style => "width:410px"
     Example: div#product_info .selling_price
+  = f.field_container :search_special_price_selector do
+    = f.label :search_special_price_selector
+    <br />
+    = f.text_field :search_special_price_selector, :style => "width:410px"
+    Example: div#product_info .special_price
