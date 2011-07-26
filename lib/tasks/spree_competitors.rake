@@ -5,8 +5,9 @@ namespace :spree_competitors do
     
     competitors = Competitor.all
     
-    CompetitorPrice.delete_all
-    
+    bad_cp = CompetitorPrice.joins(:variant).where('variants.deleted_at IS NOT NULL OR competitor_id NOT IN (?)', competitors)
+    CompetitorPrice.where(:id => bad_cp).delete_all
+
     Variant.joins(:product).where('products.deleted_at IS NULL AND variants.deleted_at IS NULL').order('products.available_on DESC').includes(:product).all.each do |variant|
       competitors.each do |competitor|
 
@@ -68,7 +69,10 @@ namespace :spree_competitors do
           price = price_content.content.gsub(/([^0-9\.])/, '').to_f unless price_content.nil?
           special_price = special_price_content.content.gsub(/([^0-9\.])/, '').to_f unless special_price_content.nil?
           puts price
-          CompetitorPrice.create({:variant_id => variant.id, :competitor_id => competitor.id, :price => price, :special_price => special_price})
+          cp = CompetitorPrice.find_or_create_by_variant_id_and_competitor_id(variant.id, competitor.id)
+          cp.price = price
+          cp.special_price = special_price
+          cp.save
         rescue Timeout::Error
           puts "Timeout due to connecting"
         end
