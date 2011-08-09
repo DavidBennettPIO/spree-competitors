@@ -1,7 +1,9 @@
 namespace :spree_competitors do
-  
+
   desc "Regenerates all the Competitor Prices"
   task :update_prices => :environment do
+    
+    include CompetitorPricesHelper
     
     competitors = Competitor.all
     
@@ -45,9 +47,7 @@ namespace :spree_competitors do
           use_index = 0
           unless competitor.search_name_selector.blank?
             doc.css(competitor.search_name_selector).each_with_index do |link, i|
-              #puts i.to_s + ' ' + link.content.downcase.gsub(/([^a-z0-9])/, '')
-              use_index = i if link.content.downcase.gsub(/([^a-z0-9])/, '') == title
-              use_index = i if (link + ' ' + variant.product.get_eb_format_id).content.downcase.gsub(/([^a-z0-9])/, '') == title
+              search_for_title title, link
             end
           end
           #puts use_index
