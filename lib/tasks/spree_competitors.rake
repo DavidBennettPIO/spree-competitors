@@ -47,6 +47,7 @@ namespace :spree_competitors do
             doc.css(competitor.search_name_selector).each_with_index do |link, i|
               #puts i.to_s + ' ' + link.content.downcase.gsub(/([^a-z0-9])/, '')
               use_index = i if link.content.downcase.gsub(/([^a-z0-9])/, '') == title
+              use_index = i if (link + ' ' + variant.product.get_eb_format_id).content.downcase.gsub(/([^a-z0-9])/, '') == title
             end
           end
           #puts use_index
