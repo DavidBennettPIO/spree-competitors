@@ -41,13 +41,11 @@ namespace :spree_competitors do
       
             end
           end
-      
-          title = variant.name.downcase.gsub(/([^a-z0-9])/, '')
           
           use_index = 0
           unless competitor.search_name_selector.blank?
             doc.css(competitor.search_name_selector).each_with_index do |link, i|
-              search_for_title title, link
+              search_for_title variant, link
             end
           end
           #puts use_index
